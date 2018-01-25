@@ -1,0 +1,9 @@
+*.pcapng
+*.pcap
+*.argus
+*.rules
+.idea
+
+flows/tran/*/*.txt
+flows/argus/*.csv
+ids-logs/*/*.csv
