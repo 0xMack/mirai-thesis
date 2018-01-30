@@ -52,3 +52,13 @@ dtree.fit(X, y)
 
 # X.to_csv('testing.csv', sep='\t')
 
+from sklearn.externals.six import StringIO
+from IPython.display import Image, display
+from sklearn.tree import export_graphviz
+import pydotplus
+dot_data = StringIO()
+export_graphviz(dtree, out_file=dot_data,
+                filled=True, rounded=True,
+                special_characters=True)
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
+display(Image(graph.create_png()))
