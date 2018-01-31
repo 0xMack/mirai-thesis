@@ -59,9 +59,9 @@ import pydotplus
 dot_data = StringIO()
 export_graphviz(dtree, out_file=dot_data,
                 filled=True, rounded=True,
-                special_characters=True)
+                special_characters=True,
+                feature_names=features,
+                class_names=y)
 
-# graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
-# display(Image(graph.create_png()))
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
-graph.write_png('testing.png')
+graph[1].write_png('testing.png')
