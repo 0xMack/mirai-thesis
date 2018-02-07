@@ -47,25 +47,25 @@ y = X["Label"]
 X = X.drop("Label", 1)
 
 
-from sklearn.model_selection import KFold, cross_val_score
-from sklearn import metrics
+from sklearn.model_selection import KFold
+from sklearn.metrics import confusion_matrix as cfmat
 kf = KFold(n_splits=10)
 kf.get_n_splits(X)
+fold_num = 1
 
 # 10-Fold Cross-Validation of Decision Tree Classifier
 for train_index, test_index in kf.split(X):
+    print("\nResults for Fold #", fold_num)
     print("TRAIN:", train_index, "   TEST:", test_index)
     X_train, X_test = X.iloc[train_index], X.iloc[test_index]
     y_train, y_test = y.iloc[train_index], y.iloc[test_index]
 
     dtree = DecisionTreeClassifier()
     dtree.fit(X_train, y_train)
-    print(dtree.score(X_test, y_test))
-
-# X.to_csv('testing.csv', sep='\t')
-
-
-
+    y_predict = dtree.predict(X_test)
+    print("Accuracy Score: ", dtree.score(X_test, y_test))
+    print(cfmat(y_test, y_predict))
+    fold_num += 1
 
 from sklearn.externals.six import StringIO
 # from IPython.display import Image, display
@@ -79,4 +79,4 @@ export_graphviz(dtree, out_file=dot_data,
                 class_names=y)
 
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
-graph.write_png('testing.png')
+graph.write_png('img/decision_tree.png')
