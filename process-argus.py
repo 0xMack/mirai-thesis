@@ -1,13 +1,7 @@
 import pandas as pd
-from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn.tree import DecisionTreeClassifier
 from os import listdir
 from os.path import isfile, join, splitext
-import math
-import subprocess
-
-# python -m pip install pandas
-
-# data = genfromtxt('/home/mack/workspace/mirai/flows/argus/ack-argus.csv', delimiter=',', dtype=None)
 
 # Read files in and pre-process csv
 argus_path = 'flows/argus/'
@@ -32,28 +26,49 @@ nan_features = ['SIntPkt', 'SIntPktAct', 'SIntPktIdl', 'DIntPkt', 'DIntPktAct', 
                 'dTtl', 'dTos', 'dMaxPktSz', 'dMinPktSz']
 
 # Features we will use
-features = ['Dur', 'Proto', 'Sport', 'Dport', 'RunTime', 'Mean', 'Sum', 'Min', 'Max', 'sTos', 'TotPkts', 'SrcPkts',
+features = ['Label', 'Dur', 'Proto', 'Sport', 'Dport', 'RunTime', 'Mean', 'Sum', 'Min', 'Max', 'sTos', 'TotPkts', 'SrcPkts',
             'DstPkts', 'sTtl', 'TotAppByte', 'TotBytes', 'SrcBytes', 'SAppBytes', 'DstBytes', 'DAppBytes', 'Load',
             'SrcLoad', 'DstLoad', 'Loss', 'SrcLoss', 'DstLoss', 'Rate', 'sMeanPktSz', 'dMeanPktSz', 'sMaxPktSz',
             'sMinPktSz']
-y = alldf["Label"]
 X = alldf[features]
 
 print(X[X.isnull().any(axis=1)][features])
 X_faulty = X[X.isnull().any(axis=1)][features].index.values.tolist()
 X = X.drop(X_faulty)
-y = y.drop(X_faulty)
 print(X[X.isnull().any(axis=1)][features])
 # print(X.loc[[88423]])
 
+# Suffles data and resets dataframe indices (drop=true prevents creating new index for old indices)
+# sample(frac=1) returns a random sample of the whole dataset (effectively just a shuffle)
+X = X.sample(frac=1).reset_index(drop=True)
 
-dtree = DecisionTreeClassifier()
-dtree.fit(X, y)
+# Split the labels from the rest of the data
+y = X["Label"]
+X = X.drop("Label", 1)
+
+
+from sklearn.model_selection import KFold, cross_val_score
+from sklearn import metrics
+kf = KFold(n_splits=10)
+kf.get_n_splits(X)
+
+# 10-Fold Cross-Validation of Decision Tree Classifier
+for train_index, test_index in kf.split(X):
+    print("TRAIN:", train_index, "   TEST:", test_index)
+    X_train, X_test = X.iloc[train_index], X.iloc[test_index]
+    y_train, y_test = y.iloc[train_index], y.iloc[test_index]
+
+    dtree = DecisionTreeClassifier()
+    dtree.fit(X_train, y_train)
+    print(dtree.score(X_test, y_test))
 
 # X.to_csv('testing.csv', sep='\t')
 
+
+
+
 from sklearn.externals.six import StringIO
-from IPython.display import Image, display
+# from IPython.display import Image, display
 from sklearn.tree import export_graphviz
 import pydotplus
 dot_data = StringIO()
@@ -64,4 +79,4 @@ export_graphviz(dtree, out_file=dot_data,
                 class_names=y)
 
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
-graph[1].write_png('testing.png')
+graph.write_png('testing.png')
