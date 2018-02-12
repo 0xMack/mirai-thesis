@@ -36,7 +36,6 @@ print(X[X.isnull().any(axis=1)][features])
 X_faulty = X[X.isnull().any(axis=1)][features].index.values.tolist()
 X = X.drop(X_faulty)
 print(X[X.isnull().any(axis=1)][features])
-# print(X.loc[[88423]])
 
 # Suffles data and resets dataframe indices (drop=true prevents creating new index for old indices)
 # sample(frac=1) returns a random sample of the whole dataset (effectively just a shuffle)
@@ -47,8 +46,6 @@ X.to_csv('6attack-argus.csv', sep=',', index=False)
 # Split the labels from the rest of the data
 y = X["Label"]
 X = X.drop("Label", 1)
-
-
 
 
 from sklearn.model_selection import KFold
@@ -83,4 +80,4 @@ export_graphviz(dtree, out_file=dot_data,
                 class_names=y)
 
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
-graph.write_png('img/decision_tree.png')
+graph.write_png('img/argus_dtree.png')

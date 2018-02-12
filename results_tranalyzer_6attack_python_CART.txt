@@ -1,0 +1,132 @@
+These are results from process-argus.py
+    - Decision Tree Classifier
+    - 10-Fold Cross Validation
+    - Using the 6-attack-type dataset created from 6 different Mirai attack types
+    - Features extracted from Tranalyzer output
+
+
+Features excluded from the model
+-------------------------------------------------------------------------------------------------------------------
+pointless_features = ['dstPort', 'srcPort', 'dstIP4', 'srcIP4', 'unixTimeFirst', 'unixTimeLast']
+hex_features = ['flowStat', 'srcMac_dstMac_numP', 'tcpFStat', 'ipTOS', 'ipFlags', 'ipOptCpCl_Num', 'tcpAggrFlags',
+                'tcpAggrAnomaly', 'tcpAggrOptions', 'tcpStates', 'icmpStat', 'icmpTCcnt', 'icmpBFType_Code',
+                'icmptmgtw']
+string_features = ['%dir', 'hdrDesc', 'srcManuf_dstManuf', 'dstPortClass', 'srcIPCC', 'dstIPCC']
+-------------------------------------------------------------------------------------------------------------------
+
+
+Features used in the model
+-------------------------------------------------------------------------------------------------------------------
+features = ['Label', 'flowInd', 'duration', 'numHdrDesc', 'numHdrs',
+            'ethVlanID', 'l4Proto', 'macPairs', 'dstPortClassN', 'numPktsSnt', 'numPktsRcvd',
+            'numBytesSnt', 'numBytesRcvd', 'minPktSz', 'maxPktSz', 'avePktSize', 'stdPktSize', 'pktps', 'bytps',
+            'pktAsm', 'bytAsm', 'ipMindIPID', 'ipMaxdIPID', 'ipMinTTL', 'ipMaxTTL', 'ipTTLChg', 'ipOptCnt',
+            'tcpPSeqCnt', 'tcpSeqSntBytes', 'tcpSeqFaultCnt', 'tcpPAckCnt', 'tcpFlwLssAckRcvdBytes', 'tcpAckFaultCnt',
+            'tcpInitWinSz', 'tcpAveWinSz', 'tcpMinWinSz', 'tcpMaxWinSz', 'tcpWinSzDwnCnt', 'tcpWinSzUpCnt',
+            'tcpWinSzChgDirCnt', 'tcpOptPktCnt', 'tcpOptCnt', 'tcpMSS', 'tcpWS', 'tcpTmS', 'tcpTmER', 'tcpEcI',
+            'tcpBtm', 'tcpSSASAATrip', 'tcpRTTAckTripMin', 'tcpRTTAckTripMax', 'tcpRTTAckTripAve',
+            'tcpRTTAckTripJitAve', 'tcpRTTSseqAA', 'tcpRTTAckJitAve', 'icmpTCcnt', 'icmpEchoSuccRatio', 'icmpPFindex',
+            'connSip', 'connDip', 'connSipDip', 'connSipDprt', 'connF']
+-------------------------------------------------------------------------------------------------------------------
+
+
+Results for Fold # 1
+TRAIN: [ 104682  104683  104684 ..., 1046812 1046813 1046814]    TEST: [     0      1      2 ..., 104679 104680 104681]
+Accuracy Score:  0.999990447259
+[[19420     0     0     0     0     0]
+ [    0 22536     0     0     0     0]
+ [    0     0 19735     0     0     0]
+ [    0     0     0 19376     0     0]
+ [    1     0     0     0 17187     0]
+ [    0     0     0     0     0  6427]]
+
+Results for Fold # 2
+TRAIN: [      0       1       2 ..., 1046812 1046813 1046814]    TEST: [104682 104683 104684 ..., 209361 209362 209363]
+Accuracy Score:  0.999980894519
+[[19546     0     0     0     0     0]
+ [    0 22707     0     0     0     0]
+ [    0     0 19923     0     0     1]
+ [    0     0     0 19100     1     0]
+ [    0     0     0     0 17040     0]
+ [    0     0     0     0     0  6364]]
+
+Results for Fold # 3
+TRAIN: [      0       1       2 ..., 1046812 1046813 1046814]    TEST: [209364 209365 209366 ..., 314043 314044 314045]
+Accuracy Score:  1.0
+[[19444     0     0     0     0     0]
+ [    0 22875     0     0     0     0]
+ [    0     0 19879     0     0     0]
+ [    0     0     0 19334     0     0]
+ [    0     0     0     0 16889     0]
+ [    0     0     0     0     0  6261]]
+
+Results for Fold # 4
+TRAIN: [      0       1       2 ..., 1046812 1046813 1046814]    TEST: [314046 314047 314048 ..., 418725 418726 418727]
+Accuracy Score:  0.999990447259
+[[19309     0     0     0     0     0]
+ [    0 22823     0     0     0     0]
+ [    0     0 20018     0     0     0]
+ [    0     0     0 19148     0     0]
+ [    0     0     0     0 17045     0]
+ [    0     0     1     0     0  6338]]
+
+Results for Fold # 5
+TRAIN: [      0       1       2 ..., 1046812 1046813 1046814]    TEST: [418728 418729 418730 ..., 523407 523408 523409]
+Accuracy Score:  0.999980894519
+[[19123     0     0     0     1     0]
+ [    0 22986     0     0     0     0]
+ [    0     0 19673     0     0     0]
+ [    1     0     0 19475     0     0]
+ [    0     0     0     0 17246     0]
+ [    0     0     0     0     0  6177]]
+
+Results for Fold # 6
+TRAIN: [      0       1       2 ..., 1046812 1046813 1046814]    TEST: [523410 523411 523412 ..., 628088 628089 628090]
+Accuracy Score:  0.999990447168
+[[19370     0     0     0     0     0]
+ [    0 22686     0     0     0     0]
+ [    0     0 19882     0     0     0]
+ [    0     0     0 19527     0     0]
+ [    0     0     0     0 16779     0]
+ [    0     0     1     0     0  6436]]
+
+Results for Fold # 7
+TRAIN: [      0       1       2 ..., 1046812 1046813 1046814]    TEST: [628091 628092 628093 ..., 732769 732770 732771]
+Accuracy Score:  1.0
+[[19331     0     0     0     0     0]
+ [    0 22769     0     0     0     0]
+ [    0     0 19717     0     0     0]
+ [    0     0     0 19315     0     0]
+ [    0     0     0     0 17139     0]
+ [    0     0     0     0     0  6410]]
+
+Results for Fold # 8
+TRAIN: [      0       1       2 ..., 1046812 1046813 1046814]    TEST: [732772 732773 732774 ..., 837450 837451 837452]
+Accuracy Score:  0.999990447168
+[[19345     0     0     1     0     0]
+ [    0 22737     0     0     0     0]
+ [    0     0 19728     0     0     0]
+ [    0     0     0 19362     0     0]
+ [    0     0     0     0 17025     0]
+ [    0     0     0     0     0  6483]]
+
+Results for Fold # 9
+TRAIN: [      0       1       2 ..., 1046812 1046813 1046814]    TEST: [837453 837454 837455 ..., 942131 942132 942133]
+Accuracy Score:  0.999980894336
+[[19175     0     0     0     0     0]
+ [    0 22794     0     0     0     0]
+ [    0     0 20017     0     0     1]
+ [    0     0     0 19260     0     0]
+ [    0     0     0     1 17068     0]
+ [    0     0     0     0     0  6365]]
+
+Results for Fold # 10
+TRAIN: [     0      1      2 ..., 942131 942132 942133]    TEST: [ 942134  942135  942136 ..., 1046812 1046813 1046814]
+Accuracy Score:  1.0
+[[19721     0     0     0     0     0]
+ [    0 22611     0     0     0     0]
+ [    0     0 19820     0     0     0]
+ [    0     0     0 19141     0     0]
+ [    0     0     0     0 16987     0]
+ [    0     0     0     0     0  6401]]
+

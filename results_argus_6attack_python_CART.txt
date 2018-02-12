@@ -2,6 +2,24 @@ These are results from process-argus.py
     - Decision Tree Classifier
     - 10-Fold Cross Validation
     - Using the 6-attack-type dataset created from 6 different Mirai attack types
+    - Features extracted from Argus output
+
+Features excluded from the model
+-------------------------------------------------------------------------------------------------------------------
+pointless_features = ['SrcAddr', 'DstAddr', 'SrcMac', 'DstMac']
+string_features = ['Dir', 'State', 'Flgs', 'StartTime']
+nan_features = ['SIntPkt', 'SIntPktAct', 'SIntPktIdl', 'DIntPkt', 'DIntPktAct', 'SrcJitter', 'DstJitter',
+                'dTtl', 'dTos', 'dMaxPktSz', 'dMinPktSz']
+-------------------------------------------------------------------------------------------------------------------
+
+
+Features used in the model
+-------------------------------------------------------------------------------------------------------------------
+features = ['Label', 'Dur', 'Proto', 'Sport', 'Dport', 'RunTime', 'Mean', 'Sum', 'Min', 'Max', 'sTos', 'TotPkts', 'SrcPkts',
+            'DstPkts', 'sTtl', 'TotAppByte', 'TotBytes', 'SrcBytes', 'SAppBytes', 'DstBytes', 'DAppBytes', 'Load',
+            'SrcLoad', 'DstLoad', 'Loss', 'SrcLoss', 'DstLoss', 'Rate', 'sMeanPktSz', 'dMeanPktSz', 'sMaxPktSz',
+            'sMinPktSz']
+-------------------------------------------------------------------------------------------------------------------
 
 Results for Fold # 1
 TRAIN: [ 104681  104682  104683 ..., 1046807 1046808 1046809]    TEST: [     0      1      2 ..., 104678 104679 104680]
