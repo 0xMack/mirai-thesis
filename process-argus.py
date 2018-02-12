@@ -42,9 +42,13 @@ print(X[X.isnull().any(axis=1)][features])
 # sample(frac=1) returns a random sample of the whole dataset (effectively just a shuffle)
 X = X.sample(frac=1).reset_index(drop=True)
 
+X.to_csv('6attack-argus.csv', sep=',', index=False)
+
 # Split the labels from the rest of the data
 y = X["Label"]
 X = X.drop("Label", 1)
+
+
 
 
 from sklearn.model_selection import KFold
