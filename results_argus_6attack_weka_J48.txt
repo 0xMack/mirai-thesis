@@ -1,3 +1,6 @@
+10-Fold Cross Validation
+---------------------------------
+
 === Run information ===
 
 Scheme:weka.classifiers.trees.J48 -C 0.25 -M 2
@@ -91,4 +94,112 @@ Weighted Avg.    1         0          1         1         1          1
       0      0      0 227524      0      0 |      d = greeth-argus
       0      0      1      0  63662      0 |      e = vse-argus
       0      0      1      0      0 170405 |      f = udp-argus
+
+
+
+
+
+
+
+Training/Testing Split -- 66%/33%
+---------------------------------
+
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
+Relation:     6attack-argus
+Instances:    1046810
+Attributes:   32
+              Label
+              Dur
+              Proto
+              Sport
+              Dport
+              RunTime
+              Mean
+              Sum
+              Min
+              Max
+              sTos
+              TotPkts
+              SrcPkts
+              DstPkts
+              sTtl
+              TotAppByte
+              TotBytes
+              SrcBytes
+              SAppBytes
+              DstBytes
+              DAppBytes
+              Load
+              SrcLoad
+              DstLoad
+              Loss
+              SrcLoss
+              DstLoss
+              Rate
+              sMeanPktSz
+              dMeanPktSz
+              sMaxPktSz
+              sMinPktSz
+Test mode:    split 66.0% train, remainder test
+
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+sMeanPktSz <= 554
+|   sMeanPktSz <= 80
+|   |   Proto <= 6: syn-argus (193043.0/4.0)
+|   |   Proto > 6: vse-argus (63662.0)
+|   sMeanPktSz > 80: udp-argus (170405.0)
+sMeanPktSz > 554
+|   sMeanPktSz <= 578
+|   |   Proto <= 6: ack-argus (193784.0)
+|   |   Proto > 6: greip-argus (198392.0)
+|   sMeanPktSz > 578: greeth-argus (227524.0)
+
+Number of Leaves  : 	6
+
+Size of the tree : 	11
+
+
+Time taken to build model: 37.45 seconds
+
+=== Evaluation on test split ===
+
+Time taken to test model on test split: 0.71 seconds
+
+=== Summary ===
+
+Correctly Classified Instances      355912               99.9992 %
+Incorrectly Classified Instances         3                0.0008 %
+Kappa statistic                          1
+Mean absolute error                      0
+Root mean squared error                  0.0017
+Relative absolute error                  0.0012 %
+Root relative squared error              0.4538 %
+Total Number of Instances           355915
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     greeth-argus
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     syn-argus
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     udp-argus
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     greip-argus
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     vse-argus
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     ack-argus
+Weighted Avg.    1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000
+
+=== Confusion Matrix ===
+
+     a     b     c     d     e     f   <-- classified as
+ 77326     0     0     0     0     0 |     a = greeth-argus
+     0 65260     0     0     0     1 |     b = syn-argus
+     0     0 58278     0     0     1 |     c = udp-argus
+     0     0     0 67664     0     0 |     d = greip-argus
+     0     0     0     0 21705     1 |     e = vse-argus
+     0     0     0     0     0 65679 |     f = ack-argus
 

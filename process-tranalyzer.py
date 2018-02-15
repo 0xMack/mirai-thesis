@@ -61,7 +61,7 @@ X = X.drop("Label", 1)
 
 
 
-from sklearn.model_selection import KFold
+from sklearn.model_selection import KFold, train_test_split
 from sklearn.metrics import confusion_matrix as cfmat
 kf = KFold(n_splits=10)
 kf.get_n_splits(X)
@@ -80,6 +80,17 @@ for train_index, test_index in kf.split(X):
     print("Accuracy Score: ", dtree.score(X_test, y_test))
     print(cfmat(y_test, y_predict))
     fold_num += 1
+
+# Now that dataset has been validated, train model and test on a 66/33 spit
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=1)
+dtree = DecisionTreeClassifier()
+dtree.fit(X_train, y_train)
+y_predict = dtree.predict(X_test)
+print("\nResults for Training/Test Split -- 66%/33%")
+print("---------------------------------------------\n")
+print("Accuracy Score: ", dtree.score(X_test, y_test))
+print(cfmat(y_test, y_predict))
+
 
 from sklearn.externals.six import StringIO
 # from IPython.display import Image, display

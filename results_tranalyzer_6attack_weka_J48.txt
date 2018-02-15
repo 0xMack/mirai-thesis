@@ -1,3 +1,6 @@
+10-Fold Cross Validation
+---------------------------------
+
 === Run information ===
 
 Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
@@ -132,3 +135,151 @@ Weighted Avg.    1.000    0.000    1.000      1.000    1.000      1.000    1.000
       0      0      0 227524      0      0 |      d = greeth-tran
       0      2      0      0 193038      0 |      e = syn-tran
       0      0      2      0      0  63662 |      f = vse-tran
+
+
+
+
+
+
+
+
+Training/Testing Split -- 66%/33%
+---------------------------------
+
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
+Relation:     6attack-tran
+Instances:    1046815
+Attributes:   63
+              Label
+              flowInd
+              duration
+              numHdrDesc
+              numHdrs
+              ethVlanID
+              l4Proto
+              macPairs
+              dstPortClassN
+              numPktsSnt
+              numPktsRcvd
+              numBytesSnt
+              numBytesRcvd
+              minPktSz
+              maxPktSz
+              avePktSize
+              stdPktSize
+              pktps
+              bytps
+              pktAsm
+              bytAsm
+              ipMindIPID
+              ipMaxdIPID
+              ipMinTTL
+              ipMaxTTL
+              ipTTLChg
+              ipOptCnt
+              tcpPSeqCnt
+              tcpSeqSntBytes
+              tcpSeqFaultCnt
+              tcpPAckCnt
+              tcpFlwLssAckRcvdBytes
+              tcpAckFaultCnt
+              tcpInitWinSz
+              tcpAveWinSz
+              tcpMinWinSz
+              tcpMaxWinSz
+              tcpWinSzDwnCnt
+              tcpWinSzUpCnt
+              tcpWinSzChgDirCnt
+              tcpOptPktCnt
+              tcpOptCnt
+              tcpMSS
+              tcpWS
+              tcpTmS
+              tcpTmER
+              tcpEcI
+              tcpBtm
+              tcpSSASAATrip
+              tcpRTTAckTripMin
+              tcpRTTAckTripMax
+              tcpRTTAckTripAve
+              tcpRTTAckTripJitAve
+              tcpRTTSseqAA
+              tcpRTTAckJitAve
+              icmpTCcnt
+              icmpEchoSuccRatio
+              icmpPFindex
+              connSip
+              connDip
+              connSipDip
+              connSipDprt
+              connF
+Test mode:    split 66.0% train, remainder test
+
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+numHdrs <= 4
+|   tcpMSS <= 0
+|   |   tcpInitWinSz <= 229
+|   |   |   minPktSz <= 25
+|   |   |   |   flowInd <= 16
+|   |   |   |   |   tcpTmS <= 1618685350
+|   |   |   |   |   |   tcpTmS <= 385073315: vse-tran (16.0)
+|   |   |   |   |   |   tcpTmS > 385073315: greip-tran (3.0/1.0)
+|   |   |   |   |   tcpTmS > 1618685350
+|   |   |   |   |   |   connSipDprt <= 4: udp-tran (3.0/1.0)
+|   |   |   |   |   |   connSipDprt > 4: syn-tran (3.0/1.0)
+|   |   |   |   flowInd > 16: vse-tran (63647.0)
+|   |   |   minPktSz > 25: udp-tran (170405.0)
+|   |   tcpInitWinSz > 229: ack-tran (193784.0)
+|   tcpMSS > 0: syn-tran (193038.0)
+numHdrs > 4
+|   numHdrs <= 5: greip-tran (198392.0)
+|   numHdrs > 5: greeth-tran (227524.0)
+
+Number of Leaves  : 	10
+
+Size of the tree : 	19
+
+
+Time taken to build model: 70.83 seconds
+
+=== Evaluation on test split ===
+
+Time taken to test model on test split: 0.57 seconds
+
+=== Summary ===
+
+Correctly Classified Instances      355914               99.9992 %
+Incorrectly Classified Instances         3                0.0008 %
+Kappa statistic                          1
+Mean absolute error                      0
+Root mean squared error                  0.0014
+Relative absolute error                  0.0009 %
+Root relative squared error              0.3706 %
+Total Number of Instances           355917
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     udp-tran
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     ack-tran
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     greip-tran
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     greeth-tran
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     syn-tran
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     vse-tran
+Weighted Avg.    1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000
+
+=== Confusion Matrix ===
+
+     a     b     c     d     e     f   <-- classified as
+ 57891     0     0     0     2     0 |     a = udp-tran
+     0 66047     0     0     0     0 |     b = ack-tran
+     0     0 67673     0     0     1 |     c = greip-tran
+     0     0     0 77349     0     0 |     d = greeth-tran
+     0     0     0     0 65570     0 |     e = syn-tran
+     0     0     0     0     0 21384 |     f = vse-tran
