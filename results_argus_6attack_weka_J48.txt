@@ -1,14 +1,12 @@
 === Run information ===
 
-Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
+Scheme:weka.classifiers.trees.J48 -C 0.25 -M 2
 Relation:     6attack-argus
 Instances:    1046810
-Attributes:   32
+Attributes:   30
               Label
               Dur
               Proto
-              Sport
-              Dport
               RunTime
               Mean
               Sum
@@ -36,7 +34,7 @@ Attributes:   32
               dMeanPktSz
               sMaxPktSz
               sMinPktSz
-Test mode:    10-fold cross-validation
+Test mode:10-fold cross-validation
 
 === Classifier model (full training set) ===
 
@@ -59,7 +57,7 @@ Number of Leaves  : 	6
 Size of the tree : 	11
 
 
-Time taken to build model: 38.96 seconds
+Time taken to build model: 38.35 seconds
 
 === Stratified cross-validation ===
 === Summary ===
@@ -75,24 +73,22 @@ Total Number of Instances          1046810
 
 === Detailed Accuracy By Class ===
 
-                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
-                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     greeth-argus
-                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     syn-argus
-                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     udp-argus
-                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     greip-argus
-                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     vse-argus
-                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     ack-argus
-Weighted Avg.    1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 1         0          1         1         1          1        greip-argus
+                 1         0          1         1         1          1        syn-argus
+                 1         0          1         1         1          1        ack-argus
+                 1         0          1         1         1          1        greeth-argus
+                 1         0          1         1         1          1        vse-argus
+                 1         0          1         1         1          1        udp-argus
+Weighted Avg.    1         0          1         1         1          1
 
 === Confusion Matrix ===
 
       a      b      c      d      e      f   <-- classified as
- 227524      0      0      0      0      0 |      a = greeth-argus
+ 198392      1      0      0      0      0 |      a = greip-argus
       0 193038      0      0      1      0 |      b = syn-argus
-      0      0 170405      0      0      1 |      c = udp-argus
-      0      0      0 198392      0      1 |      d = greip-argus
-      0      0      0      0  63662      1 |      e = vse-argus
-      0      1      0      0      0 193784 |      f = ack-argus
-
-
+      0      1 193784      0      0      0 |      c = ack-argus
+      0      0      0 227524      0      0 |      d = greeth-argus
+      0      0      1      0  63662      0 |      e = vse-argus
+      0      0      1      0      0 170405 |      f = udp-argus
 

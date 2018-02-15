@@ -20,13 +20,13 @@ alldf = pd.concat(dfs, ignore_index=True)
 
 
 # Features which will not be used
-pointless_features = ['SrcAddr', 'DstAddr', 'SrcMac', 'DstMac']
+pointless_features = ['SrcAddr', 'DstAddr', 'SrcMac', 'DstMac', 'Sport', 'Dport']
 string_features = ['Dir', 'State', 'Flgs', 'StartTime']
 nan_features = ['SIntPkt', 'SIntPktAct', 'SIntPktIdl', 'DIntPkt', 'DIntPktAct', 'SrcJitter', 'DstJitter',
                 'dTtl', 'dTos', 'dMaxPktSz', 'dMinPktSz']
 
 # Features we will use
-features = ['Label', 'Dur', 'Proto', 'Sport', 'Dport', 'RunTime', 'Mean', 'Sum', 'Min', 'Max', 'sTos', 'TotPkts', 'SrcPkts',
+features = ['Label', 'Dur', 'Proto', 'RunTime', 'Mean', 'Sum', 'Min', 'Max', 'sTos', 'TotPkts', 'SrcPkts',
             'DstPkts', 'sTtl', 'TotAppByte', 'TotBytes', 'SrcBytes', 'SAppBytes', 'DstBytes', 'DAppBytes', 'Load',
             'SrcLoad', 'DstLoad', 'Loss', 'SrcLoss', 'DstLoss', 'Rate', 'sMeanPktSz', 'dMeanPktSz', 'sMaxPktSz',
             'sMinPktSz']
