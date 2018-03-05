@@ -6,4 +6,8 @@
 
 flows/tran/*/*.txt
 flows/argus/*.csv
+flows/ctu/*.csv
+flows/ctu/*.labeled
 ids-logs/*/*.csv
+processed/*.csv
+CTU-13-Dataset/*

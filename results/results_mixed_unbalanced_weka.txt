@@ -1,0 +1,109 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -C 0.25 -M 2
+Relation:     mixed_unbalanced
+Instances:    1052387
+Attributes:   30
+              Label
+              Dur
+              Proto
+              RunTime
+              Mean
+              Sum
+              Min
+              Max
+              sTos
+              TotPkts
+              SrcPkts
+              DstPkts
+              sTtl
+              TotAppByte
+              TotBytes
+              SrcBytes
+              SAppBytes
+              DstBytes
+              DAppBytes
+              Load
+              SrcLoad
+              DstLoad
+              Loss
+              SrcLoss
+              DstLoss
+              Rate
+              sMeanPktSz
+              dMeanPktSz
+              sMaxPktSz
+              sMinPktSz
+Test mode:    split 66.0% train, remainder test
+
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+sMinPktSz <= 554
+|   sMinPktSz <= 535
+|   |   sMaxPktSz <= 67
+|   |   |   sTtl <= 64
+|   |   |   |   DstPkts <= 0: vse-argus (63662.0)
+|   |   |   |   DstPkts > 0: Normal (48.0)
+|   |   |   sTtl > 64: Botnet (452.0/1.0)
+|   |   sMaxPktSz > 67
+|   |   |   DstPkts <= 0: syn-argus (193044.0/6.0)
+|   |   |   DstPkts > 0
+|   |   |   |   sTtl <= 126: Normal (4625.0/5.0)
+|   |   |   |   sTtl > 126: Botnet (451.0/1.0)
+|   sMinPktSz > 535: udp-argus (170405.0)
+sMinPktSz > 554
+|   sMeanPktSz <= 583.778931
+|   |   Proto <= 6: ack-argus (193784.0)
+|   |   Proto > 6: greip-argus (198392.0)
+|   sMeanPktSz > 583.778931: greeth-argus (227524.0)
+
+Number of Leaves  : 	10
+
+Size of the tree : 	19
+
+
+Time taken to build model: 38.68 seconds
+
+=== Evaluation on test split ===
+
+Time taken to test model on test split: 0.83 seconds
+
+=== Summary ===
+
+Correctly Classified Instances      357807               99.9986 %
+Incorrectly Classified Instances         5                0.0014 %
+Kappa statistic                          1
+Mean absolute error                      0
+Root mean squared error                  0.0018
+Relative absolute error                  0.0017 %
+Root relative squared error              0.5537 %
+Total Number of Instances           357812
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     vse-argus
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     syn-argus
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     greeth-argus
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     ack-argus
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     greip-argus
+                 1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000     udp-argus
+                 0.998    0.000    1.000      0.998    0.999      0.999    0.999     0.998     Normal
+                 1.000    0.000    0.990      1.000    0.995      0.995    1.000     0.990     Botnet
+Weighted Avg.    1.000    0.000    1.000      1.000    1.000      1.000    1.000     1.000
+
+=== Confusion Matrix ===
+
+     a     b     c     d     e     f     g     h   <-- classified as
+ 21585     0     0     0     0     0     0     0 |     a = vse-argus
+     0 65826     0     0     0     0     0     0 |     b = syn-argus
+     0     0 77145     0     0     0     0     0 |     c = greeth-argus
+     1     0     0 65999     0     0     0     0 |     d = ack-argus
+     1     0     0     0 67270     0     0     0 |     e = greip-argus
+     0     0     0     0     0 58047     0     0 |     f = udp-argus
+     0     0     0     0     0     0  1635     3 |     g = Normal
+     0     0     0     0     0     0     0   300 |     h = Botnet
+
