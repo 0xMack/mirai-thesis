@@ -17,8 +17,8 @@ def balance_partition(X):
         temp_X = X.loc[X['Label'] == label]
         temp_train, temp_test = train_test_split(temp_X, train_size=800, random_state=1)
         train.append(temp_train), test.append(temp_test)
-    train = pd.concat(train, ignore_index=True)
-    test = pd.concat(test, ignore_index=True)
+    train = pd.concat(train, ignore_index=True).sample(frac=1).reset_index(drop=True)
+    test = pd.concat(test, ignore_index=True).sample(frac=1).reset_index(drop=True)
     return train, test
 
 
@@ -93,8 +93,10 @@ ctu_y = ctu_X["Label"]
 ctu_X = ctu_X.drop("Label", 1)
 
 balanced_train, balanced_test = balance_partition(combined_X)
-balanced_train.to_csv('processed/mixed_balanced_train.csv', sep=',', index=False)
-balanced_test.to_csv('processed/mixed_balanced_test.csv', sep=',', index=False)
+
+# Had to manually reorder top rows so that classes appeared in the same order (to fix weka issue)
+# balanced_train.to_csv('processed/mixed_balanced_train.csv', sep=',', index=False)
+# balanced_test.to_csv('processed/mixed_balanced_test.csv', sep=',', index=False)
 
 bal_y_train, bal_y_test = balanced_train["Label"], balanced_test["Label"]
 bal_X_train, bal_X_test = balanced_train.drop("Label", 1), balanced_test.drop("Label", 1)
