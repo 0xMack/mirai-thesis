@@ -104,4 +104,4 @@ export_graphviz(dtree, out_file=dot_data,
                 class_names=y)
 
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
-graph.write_png('img/tranalyzer_dtree_python.png')
+graph.write_png('img/tranalyzer_dtree.png')
